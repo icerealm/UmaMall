@@ -27,7 +27,7 @@ class ProductNew extends Component {
                 form.append(`image_${index}`, image)
             }
         )
-        this.props.saveProduct(form), () => console.log("save successfully");
+        this.props.saveProduct(form, () => this.props.history.push('/product'));
     }
 
     onFileSubmit(files) {
