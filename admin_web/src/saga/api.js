@@ -31,3 +31,7 @@ export const fetchAProduct = () => {
     return axios.get(`${API_URL}/products/${id}`)
 }
 
+export const addProduct = (product) => {
+    return axios.post(`${API_URL}/products`, product);
+}
+

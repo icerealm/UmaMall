@@ -21,8 +21,8 @@ class Product extends Component {
                     <td><Link to={`/product/${product.id}`}>{index++}</Link></td>
                     <td>{product.name}</td>
                     <td>{product.description}</td>
-                    <td>{product.type}</td>
-                    <td>{`${product.price.major} บาท`}</td>
+                    <td>{product.type.name}</td>
+                    <td>{`${product.price.major}.${product.price.minor || '00'} บาท`}</td>
                 </tr>
             );
         });       

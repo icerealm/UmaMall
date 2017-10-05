@@ -20,7 +20,7 @@ const store = createStore(reducer,
                               autoRehydrate() 
                             )
                         );
-persistStore(store);
+// persistStore(store);
                         
 
 ReactDOM.render(

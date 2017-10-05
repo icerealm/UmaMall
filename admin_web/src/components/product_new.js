@@ -2,36 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import _ from 'lodash';
-import Dropzone from 'react-dropzone'
-import { renderInputField, renderInputTextAreaField, renderDropdownField } from './formhelpers';
-import { PageContentSection, Button } from './helpers';
+import { renderInputField, renderInputTextAreaField, renderDropdownField, renderDropzoneInput, convert_to_price_obj } from './formhelpers';
+import { PageContentSection, PageCommandSection, Button, Card, SubTitleSection } from './helpers';
 import { fetchProductType, saveProduct } from '../actions';
 import * as Lang from '../lang/th-lang';
 import * as Color from './helpers/color';
 import * as Validator from './formhelpers/validation';
 
-
-const renderDropzoneInput = (field) => {
-    const files = field.input.value;
-    return (
-      <div>
-        <Dropzone
-          name={field.name}
-          onDrop={( filesToUpload, e ) => field.input.onChange(filesToUpload)}
-        >
-          <div>Try dropping some files here, or click to select files to upload.</div>
-        </Dropzone>
-        {field.meta.touched &&
-          field.meta.error &&
-          <span className="error">{field.meta.error}</span>}
-        {files && Array.isArray(files) && (
-          <ul>
-            { files.map((file, i) => <li key={i}>{file.name}</li>) }
-          </ul>
-        )}
-      </div>
-    );
-}  
+ 
 
 class ProductNew extends Component {
     
@@ -40,7 +18,21 @@ class ProductNew extends Component {
     }
 
     onSubmit(values) {        
-        this.props.saveProduct(values, () => this.props.history.push('/product'));
+        let form = new FormData();
+        form.append("name", values.name);
+        form.append("description", values.description);
+        form.append("type", JSON.stringify(this.props.productTypes[values.type]));
+        form.append("price", JSON.stringify(convert_to_price_obj(values.price_value)))
+        _.map(values.images, (image, index) => {
+                form.append(`image_${index}`, image)
+            }
+        )
+        this.props.saveProduct(form), () => console.log("save successfully");
+    }
+
+    onFileSubmit(files) {
+        console.log(files.value);
+        let data = new FormData();
     }
 
     render() {
@@ -78,8 +70,16 @@ class ProductNew extends Component {
                         data={data}
                         component={renderDropdownField}
                     />
+                    <Card>
+                        <Field 
+                            name="images"
+                            color={Color.label_text_color}
+                            component={renderDropzoneInput}
+                            fileHandler={this.onFileSubmit.bind(this)}
+                        />
+                    </Card>
                 </form>
-                <div>
+                <PageCommandSection>
                     <Button onClick={ handleSubmit(this.onSubmit.bind(this)) } 
                         bgcolor={Color.button_bg_color}
                         hoverColor={Color.button_hover} 
@@ -93,7 +93,7 @@ class ProductNew extends Component {
                     >
                         {Lang.button_back}
                     </Button>
-                </div>
+                </PageCommandSection>
             </PageContentSection>
         );
     }

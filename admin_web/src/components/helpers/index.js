@@ -42,6 +42,12 @@ export const Title = styled.h1`
             text-align: center;
             color: ${props => props.color};
             `;
+export const SubTitleSection = styled.div`
+            font-size: 1em;
+            font-weight: bold;
+            text-align: left;
+            color: ${props => props.color};
+`
 
 export const Wrapper = styled.section`
             padding: 4em;
