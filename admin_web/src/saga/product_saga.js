@@ -22,7 +22,28 @@ function* addProductGenerator(action) {
     }
 } 
 
+function* updateProductGenerator(action) {
+    const payload = yield call(API.updateProduct, action.payload);
+    yield put({
+        type: Constants.UPDATE_PRODUCT_SUCCESS,
+        payload
+    })
+    if (action.onSuccess) {
+        action.onSuccess();
+    }
+}
+
+function * getProductImagesGenerator(action) {
+    const payload = yield call(API.fetchImagesByProduct, action.payload);
+    yield put({
+        type: Constants.FETCH_BIN_DATA_BY_PRODUCT_SUCCESS,
+        payload
+    })
+}
+
 export const ProductSagas = [
     takeEvery(Constants.USER_FETCH_PRODUCT, fetchProductGenerator),
-    takeEvery(Constants.USER_SAVE_PRODUCT, addProductGenerator)
+    takeEvery(Constants.USER_SAVE_PRODUCT, addProductGenerator),
+    takeEvery(Constants.USER_UPDATE_PRODUCT, updateProductGenerator),
+    takeEvery(Constants.USER_FETCH_BIN_DATA_BY_PRODUCT, getProductImagesGenerator)
 ];

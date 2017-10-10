@@ -28,7 +28,6 @@ class Product extends Component {
         });       
     }
     render() {
-        console.log(this.props.products)
         return (
             <div className="container-fluid">
                 <Title color={Color.label_title_text}>{Lang.lable_product}</Title>

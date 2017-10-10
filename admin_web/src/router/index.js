@@ -8,6 +8,7 @@ import ProductTypeNew from '../components/producttype_new';
 import ProductTypeUpdate from '../components/producttype_update';
 import Product from '../components/product';
 import ProductNew from '../components/product_new';
+import ProductUpdate from '../components/product_update';
 import Stock from '../components/stock';
 
 
@@ -21,6 +22,7 @@ export const router = () => {
                     <Route path="/producttype/:id" component={ProductTypeUpdate} />
                     <Route path="/producttype" component={ProductType} />
                     <Route path="/product/new" component={ProductNew} />
+                    <Route path="/product/:id" component={ProductUpdate} />
                     <Route path="/product" component={Product} />
                     <Route path="/stock" component={Stock} />
                     <Route path="/" component={Home} />

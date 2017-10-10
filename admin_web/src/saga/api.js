@@ -35,3 +35,15 @@ export const addProduct = (product) => {
     return axios.post(`${API_URL}/products`, product);
 }
 
+export const updateProduct = (id, product) => {
+    return axios.put(`${API_URL}/products/${id}`, product);
+}
+
+export const fetchImagesByProduct = (id) => {
+    return axios.get(`${API_URL}/products/${id}/images`)
+}
+
+export const getBinaryData = (id) => {
+    return axios.get(`${API_URL}/binaryData/${id}`)
+}
+

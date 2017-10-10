@@ -9,6 +9,7 @@ export const lable_stock = 'คลัง';
 export const lable_price = 'ราคา';
 export const lable_descripton = 'รายละเอียด';
 export const lable_home = 'Home';
+export const lable_saved_file = 'ไฟล์ที่เก็บไว้';
 
 
 

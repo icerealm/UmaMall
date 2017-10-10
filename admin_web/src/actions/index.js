@@ -58,3 +58,17 @@ export function saveProduct(value, onSuccess) {
     }
 }
 
+export function updateProduct(id, value, onSuccess) {
+    return {
+        type: Constants.USER_UPDATE_PRODUCT_TYPE,
+        payload:{id, value},
+        onSuccess
+    }
+}
+
+export function getProductImages(id) {
+    return {
+        type: Constants.USER_FETCH_BIN_DATA_BY_PRODUCT,
+        payload: id
+    }
+}
